@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player_creater</title>
+</head>
+<body>
+<h5>{{ error }}</h5>
+<h1>Введите ваши данные</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for = "name">Ваше имя:</label>
+        <input type = "text" id = "name" name = "name" maxlength="30" required>
+
+        <label for = "player_class">Выбериет класс указав его ИД:</label>
+        <input type = "text" id = "player_class" name = "player_class" maxlength="30" required>
+
+        <button type="submit">Создать героя</button>
+    </form>
+    {% for player_class in Player_classes %}
+    <ul>
+        <li align="left"> Id класса: {{ player_class.class_id }} | Название: {{ player_class.class_name }} |
+                          Описание: {{ player_class.class_description }} |
+                          Здоровье: {{ player_class.class_heals }}
+        </li>
+    </ul>
+    {% endfor %}
+</body>
+</html>

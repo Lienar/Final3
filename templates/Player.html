@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+</head>
+<body>
+<b><h1>Зал героя {{ player_name }}</h1></b>
+<h1>////\\\\</h1>
+<h3>Здоровье героя {{ health }}</h3>
+<h1>\\\\////</h1>
+<h1>////\\\\</h1>
+<h3>Класс героя {{ player_class }}</h3>
+<h1>\\\\////</h1>
+<h1>////\\\\</h1>
+<h2>Инвентарь:</h2>
+    {% for item in inventory %}
+    {% if item.item_name != 'Empty' %}
+    <ul>
+        <li align="left"> Название: {{ item.item_name }} | Мнимальный урон: {{ item.damage_min }} | Максимальный урон: {{ item.damage_max }}
+            Презарядка: {{ item.item_cooldown }}  <a>Описание: {{ item.item_description }}</a>
+        </li>
+    </ul>
+    {% endif %}
+    {% endfor %}
+<h1>\\\\////</h1>
+<h2><b><a class="page-link" href="http://127.0.0.1:8000/Enter_dungeon/?player_name={{ player_name }}">
+           Подойти ко входу в подземелье
+        </a></b></h2>
+</body>
+</html>

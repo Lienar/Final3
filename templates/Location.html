@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+</head>
+<body>
+<h1>{{ location_name }}</h1>
+    <h2>{{ player_name }} входит в {{ location_name }}</h2>
+    <h2>////\\\\</h2>
+<h3>{{ location_description }}</h3>
+<h4>////\\\\</h4>
+<h2> Теперь есть время подумать, и решить что делать </h2>
+<h4>\\\\////</h4>
+
+<h2><b><a class="page-link" href="http://127.0.0.1:8000/Move/?player_name={{ player_name }}&location_map_id={{ location_map_id }}" aria-label="Previous">
+           идти дальше
+</a></b></h2>
+<h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Убежал' }}" aria-label="Previous">
+            убежать
+        </a></b></h2>
+</body>
+</html>

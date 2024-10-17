@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Battel</title>
+</head>
+<body>
+    <h1>{{ location_name }}</h1>
+    <h4 align="center"> У {{ player_name }} сейчас здоровья {{ player_health }}</h4>
+    {% if turn == 0 %}
+        <h2>{{ player_name }} входит в {{ location_name }}</h2>
+    {% endif %}
+    <h2>////\\\\</h2>
+    <h2> {{ location_description }}</h2>
+    {% if turn == 0 %}
+        <h2> Перед {{ player_name }} враг. Это {{ enemy_name }}</h2>
+        <h2> {{ enemy_description }}</h2>
+        <h2>\\\\////</h2>
+        {% for item in inventory %}
+        {% if item.item_name != 'Empty' %}
+            <ul>
+                {% if item.item_cooldown <= 0 %}
+                    <li align="left"> <a class="page-link" href="http://127.0.0.1:8000/Battel/?player_name={{ player_name }}&player_used_item={{ item.item_name }}&location_map_id={{ location_map_id }}&location_name={{ location_name }}&turn={{ 1 }}">
+                    {{ player_name }} может воспользоваться {{ item.item_name }} | минимальный урон {{ item.damage_min }} | максимальный урон {{ item.damage_max }} | перезарядка {{ item.item_cooldown }}</a>
+                    </li>
+                {% else %}
+                    <li align="left"> <a class="page-link" href="http://127.0.0.1:8000/Battel/?player_name={{ player_name }}&player_used_item={{ item.item_name }}&location_map_id={{ location_map_id }}&location_name={{ location_name }}&turn={{ 1 }}">
+                    {{ player_name }} пока не может использовать {{ item.item_name }}, осталось ходов до перрезарядки {{ item.item_cooldown }} | применние до перезрядки приведет к пропуску хода</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+        {% endfor %}
+    <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+            Можно убежать пока не поздно
+    </a></b></h2>
+    {% else %}
+        {% if is_player_win == False %}
+            <h2>{{ enemy_battel_text }}</h2>
+            <h2>\\\\////</h2>
+            {% for item in inventory %}
+            {% if item.item_name != 'Empty' %}
+                <ul>
+                    {% if item.item_cooldown <= 0 %}
+                        <li align="left"> <a class="page-link" href="http://127.0.0.1:8000/Battel/?player_name={{ player_name }}&player_used_item={{ item.item_name }}&location_map_id={{ location_map_id }}&location_name={{ location_name }}&turn={{ 1 }}">
+                        {{ player_name }} может воспользоваться {{ item.item_name }} | минимальный урон {{ item.damage_min }} | максимальный урон {{ item.damage_max }} | перезарядка {{ item.item_cooldown }}</a>
+                        </li>
+                    {% else %}
+                        <li align="left"> <a class="page-link" href="http://127.0.0.1:8000/Battel/?player_name={{ player_name }}&player_used_item={{ item.item_name }}&location_map_id={{ location_map_id }}&location_name={{ location_name }}&turn={{ 1 }}">
+                        {{ player_name }} пока не может использовать {{ item.item_name }}, осталось ходов до перрезарядки {{ item.item_cooldown }} | применние до перезрядки приведет к пропуску хода</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+            {% endfor %}
+        {% else %}
+        <h2><b><a class="page-link" href="http://127.0.0.1:8000/Move/?player_name={{ player_name }}&location_map_id={{ location_map_id }}" aria-label="Previous">
+           идти дальше
+        </a></b></h2>
+        <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+            Покинуть подземелье не дойдя до конца
+        </a></b></h2>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

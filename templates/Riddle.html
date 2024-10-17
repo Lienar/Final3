@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riddle</title>
+</head>
+<body>
+<h1>{{ location_name }}</h1>
+    <h2>{{ player_name }} входит в {{ location_name }}</h2>
+    <h2>////\\\\</h2>
+    <h2>{{ location_description }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for = "answer">Напишите свой ответ:</label>
+        <input type = "text" id = "answer" name = "answer" maxlength="30" required>
+
+        <button type="submit"> Ответить </button>
+    </form>
+    <h2>////\\\\</h2>
+    <h2>\\\\////</h2>
+    {% if is_riddle_solved == True %}
+    <h2> {{ riddle_solved_text }}</h2>
+    <h2><b><a class="page-link" href="http://127.0.0.1:8000/Move/?player_name={{ player_name }}&location_map_id={{ location_map_id }}" aria-label="Previous">
+           идти дальше
+    </a></b></h2>
+    <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+            Покинуть подземелье не дойдя до конца
+        </a></b></h2>
+    {% else %}
+    <h2> {{ riddle_solved_text }}</h2>
+    <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+            Но всегда можно отступить и покинуть подземелье
+    </a></b></h2>
+    {% endif %}
+</body>
+</html>

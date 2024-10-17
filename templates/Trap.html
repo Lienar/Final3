@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trape</title>
+</head>
+<body>
+    <h1>{{ location_name }}</h1>
+    <h4 align="center"> У {{ player_name }} сейчас здоровья {{ player_health }}</h4>
+    <h2>{{ player_name }} входит в {{ location_name }}</h2>
+    <h2>////\\\\</h2>
+    {% if is_player_dead == False %}
+        <h2>{{ location_description }}</h2>
+        <h2>\\\\////</h2>
+        {% if trap_exists == True %}
+            {% if trap_found == False %}
+                <h2>{{ trap_trap_description }}</h2>
+                <h2>нанесено {{ trap_damage }}</h2>
+                <h2>\\\\////</h2>
+                <h2><b><a class="page-link" href="http://127.0.0.1:8000/Move/?player_name={{ player_name }}&location_map_id={{ location_map_id }}" aria-label="Previous">
+                идти дальше
+                </a></b></h2>
+                <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+                Покинуть подземелье не дойдя до конца
+                </a></b></h2>
+            {% else %}
+                <h2> {{ player_name }} вовремя избежал ловушки </h2>
+                <h2>\\\\////</h2>
+                <h2><b><a class="page-link" href="http://127.0.0.1:8000/Move/?player_name={{ player_name }}&location_map_id={{ location_map_id }}" aria-label="Previous">
+                идти дальше
+                </a></b></h2>
+                <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+                Покинуть подземелье не дойдя до конца
+                </a></b></h2>
+            {% endif %}
+        {% endif %}
+        {% else %}
+        <h2> {{ text }}</h2>
+        <h2>\\\\////</h2>
+        <h2><b><a class="page-link" href="http://127.0.0.1:8000/Gameover/?player_name={{ player_name }}&text={{ 'Устал, пора отдохнуть' }}" aria-label="Previous">
+            Далее
+        </a></b></h2>
+    {% endif %}
+</body>
+</html>
